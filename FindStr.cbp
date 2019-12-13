@@ -24,6 +24,8 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="src/ANSI_include.h" />
+		<Unit filename="src/args.cpp" />
+		<Unit filename="src/args.h" />
 		<Unit filename="src/defines.h" />
 		<Unit filename="src/help.cpp" />
 		<Unit filename="src/help.h" />
