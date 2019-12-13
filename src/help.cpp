@@ -3,31 +3,44 @@
 
 void printHelp() {
 	std::cout <<
-	"A utility for Shape files (*.mod) found in Pikmin 1."                           << std::endl <<
+	"A tool for replacing C-Strings in binary files."                                << std::endl <<
 	""                                                                               << std::endl <<
-	"TWEAKMOD errand \"filename\" [ errand \"filename\" ] [ ... ]"                   << std::endl <<
+	"FINDSTR \"filename\" /curStr \"str\" [/repStr \"str\"] [/nullBytes int] [/offset int]"       << std::endl <<
+	"[/blind]"                                                                       << std::endl <<
 	""                                                                               << std::endl <<
-	"  errand            Function to be performed"                                   << std::endl <<
-	"                      iMOD  input a Shape file (*.mod)"                         << std::endl <<
-	"                      oOBJ  output a Wavefront Object file (*.obj)"             << std::endl <<
-	"                      oDMD  output a Dolphin Model file (*.dmd)"                << std::endl <<
-	"                      oLOG  output to command window and log file"              << std::endl <<
+	"  filename          Name of file to open"                                       << std::endl <<
 	""                                                                               << std::endl <<
-	"  filename          Name of file to perform errand on."                         << std::endl <<
+	"  /curStr           Search for a string and update the File Position with its"  << std::endl <<
+	"                    location."                                                  << std::endl <<
+	"     str | String to search for"                                                << std::endl <<
 	""                                                                               << std::endl <<
-	"Only one input errand should be given."                                         << std::endl <<
-	"Any number of output errands can be given."                                     << std::endl <<
+	"  /repStr           Write a string at the File Position, given it is smaller"   << std::endl <<
+	"                    than the string given by the /curStr argument."             << std::endl <<
+	"     str | Replacement string"                                                  << std::endl <<
+	""                                                                               << std::endl <<
+	"  /nullBytes        Operate under the assumption that null bytes pad out the"   << std::endl <<
+	"                    curStr and repStr strings to the next multiple of given"    << std::endl <<
+	"                    value.  For hexadecimal, prefix with 0x."                   << std::endl <<
+	"     int | Given value"                                                         << std::endl <<
+	""                                                                               << std::endl <<
+	"  /offset           Manually update the File Position before doing anything."   << std::endl <<
+	"                    For hexadecimal, prefix with 0x."                           << std::endl <<
+	"     int | File Position offset"                                                << std::endl <<
+	""                                                                               << std::endl <<
+	"  /blind            Disregard curStr length and even allows /repStr argument"   << std::endl <<
+	"                    to function without a /curStr argument."                    << std::endl <<
+	""                                                                               << std::endl <<
 	""                                                                               << std::endl <<
 	"To bring up help information, pass /? as the only argument"                     << std::endl <<
 	""                                                                               << std::endl <<
 	"ERRORLEVELS:"                                                                   << std::endl <<
-	"  -1  | Help prompt called"                                                     << std::endl <<
-	"  -2  | Malformed arguments"                                                    << std::endl;
+	"  The File Position after program execution is returned via the errorlevel."    << std::endl <<
+	"  In the event of a failure, 0 will be returned."                               << std::endl;
 }
 
 void printMalformedArgumentsErrorMsg() {
 	std::cout <<
-	"Malformed arguments (errand without filename)"                                  << std::endl;
+	"Malformed arguments!"                                                           << std::endl;
 }
 
 void printStrSizeErrorMsg() { 
@@ -38,4 +51,14 @@ void printStrSizeErrorMsg() {
 void printStrNotFoundErrorMessage() { 
 	std::cout
 	<< "Current string not found!"                                                   << std::endl;
+}
+
+void printFileNotFoundMsg() { 
+	std::cout
+	<< "File not found!"                                                             << std::endl;
+}
+
+void printImpossible() { 
+	std::cout
+	<< "Incomplete request!  Impossible!"                                            << std::endl;
 }

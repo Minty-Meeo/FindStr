@@ -3,14 +3,16 @@
 
 struct c_str {
 	unsigned char* str;
-	size_t len;
-	size_t truLen;
+	size_t len = 0;
+	size_t truLen = 0;
 };
 
-enum operationMode {
-	mode1,
-	mode2,
-	mode3,
+struct operationMode {
+	bool seek = false;
+	bool write = false;
+	bool blind = false;
+	std::ios::pos_type filePos = 0;
+	unsigned int tempLen;
 };
 
 #endif /* DEFINES_H */
